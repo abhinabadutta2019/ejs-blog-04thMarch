@@ -1,0 +1,38 @@
+<body>
+  <p><h3><%=blog.title %></h3> <%= blog._id %> </p>
+  <p><%= blog.body %></p>
+
+  <div>
+    <a class="delete1" data-doc="<%= blog._id %>">delete</a>
+  </div>
+
+  <script >
+        const deleteBtn = document.querySelector('.delete1');
+
+        deleteBtn.addEventListener("click", ()=> {
+          // console.log();
+          const idOfBlog = location.pathname.split("/")[2];
+
+          fetch(`/blog-delete/${idOfBlog}`,{
+            method: "POST"
+          }).then(data => data.json()).then(data => {
+            console.log(data, "after delete");
+
+            window.location.href = data.redirectToUrl
+          }).catch((err)=>{
+            console.log(err);
+          })
+        })
+
+
+
+
+
+
+  </script>
+
+
+
+  
+
+</body>
